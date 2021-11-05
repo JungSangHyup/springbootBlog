@@ -1,5 +1,10 @@
 package com.cos.blog.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -11,7 +16,12 @@ import javax.persistence.Id;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
-@Entity // User 클래스가 MySQL에 테이블이 생성된다
+
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Entity
 public class User {
     @Id // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 연결된 DB의 넘버링 전략을 따라간다.
