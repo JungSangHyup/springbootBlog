@@ -24,11 +24,11 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Fetch;
 
 
-@Builder
+@Builder // ORM -> Java Object 테이블로 매핑해주는 기술
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Entity
+@Entity //User 클래스가 MySQL에 테이블이 생성이 된다.
 public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
