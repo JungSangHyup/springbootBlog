@@ -14,7 +14,20 @@ let index = {
         }
         console.log(data);
 
-        $.ajax().done().fail(); // 통신을 이용해서 3개의 파라미터를
+        $.ajax({
+            type: "POST",
+            url: "/api/user",
+            data: JSON.stringify(data),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json" // 응답형태
+        }).done(resp => {
+                alert("회원가입이 완료되었습니다.");
+                alert(resp);
+                location.href = "/";
+            }
+        ).fail(err => {
+            alert(JSON.stringify(err))
+        }); // 통신을 이용해서 3개의 파라미터를
     }
 }
 
