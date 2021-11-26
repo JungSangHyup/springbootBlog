@@ -17,9 +17,6 @@
             <label for="email">Email:</label>
             <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
         </div>
-
-
-
     </form>
     <button id="btn-save" class="btn btn-primary">회원가입</button>
 </div>
