@@ -6,6 +6,9 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.swing.text.html.Option;
+import java.util.Optional;
+
 class UserServiceTest {
     @Autowired
     private UserService userService;
@@ -23,9 +26,9 @@ class UserServiceTest {
 
         userService.회원가입(user);
 
-        User user2 = userRepository.findByUsername(user.getUsername());
+        Optional<User> user2 = userRepository.findByUsername(user.getUsername());
 
 
-        Assertions.assertThat(user2.getUsername()).isEqualTo(user.getUsername());
+        Assertions.assertThat(user2.get().getUsername()).isEqualTo(user.getUsername());
     }
 }
