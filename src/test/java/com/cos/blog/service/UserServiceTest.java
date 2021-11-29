@@ -6,9 +6,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
-
 class UserServiceTest {
     @Autowired
     private UserService userService;
@@ -19,16 +16,19 @@ class UserServiceTest {
     @Test
     public void 회원가입(){
         User user = new User();
+        User user2 = null;
 
         user.setUsername("jsh170303");
         user.setPassword("123456");
         user.setEmail("jsh170303@naver.com");
 
-        userService.회원가입(user);
-
-        Optional<User> user2 = userRepository.findByUsername(user.getUsername());
-
-
-        Assertions.assertThat(user2.get().getUsername()).isEqualTo(user.getUsername());
+        try{
+            user2 = userRepository.findByUsername(user.getUsername())
+                    .orElseThrow(() -> new NullPointerException()
+                    );
+        }catch (NullPointerException e){
+            Assertions.fail("Not found User!");
+        }
+        Assertions.assertThat(user2.getUsername()).isEqualTo(user.getUsername());
     }
 }
