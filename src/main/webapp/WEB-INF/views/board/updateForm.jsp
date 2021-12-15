@@ -4,15 +4,16 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-bs4.min.js"></script>
 <div class="container">
     <form>
+        <input type="hidden" id="id" value="${board.id}"/>
         <div class="form-group">
-            <input type="text" name="title" class="form-control" id="title" placeholder="Enter Title">
+            <input type="${board.title}" name="title" class="form-control" id="title" placeholder="Enter Title"
+            value="${board.title}">
         </div>
 
         <div class="form-group">
-            <textarea class="form-control summernote" rows="5" id="content"></textarea>
+            <textarea class="form-control summernote" rows="5" id="content">${board.content}</textarea>
         </div>
-
-        <button id="btn-save" class="btn btn-primary">글쓰기</button>
+        <button id="btn-update" class="btn btn-primary">글수정</button>
     </form>
 </div>
 <script>

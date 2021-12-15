@@ -19,7 +19,7 @@ import java.sql.Timestamp;
 public class User {
     @Id // Primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 연결된 DB의 넘버링 전략을 따라간다.
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 30)
     private String username;

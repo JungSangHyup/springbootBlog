@@ -15,7 +15,6 @@ let index = {
             password: $("#password").val(),
             email: $("#email").val()
         }
-        console.log(data);
 
         $.ajax({
             type: "POST",

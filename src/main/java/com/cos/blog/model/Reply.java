@@ -25,7 +25,7 @@ import org.hibernate.annotations.CreationTimestamp;
 public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @Column(nullable = false, length = 200)
     private String content; // 섬머노트 라이브러리
