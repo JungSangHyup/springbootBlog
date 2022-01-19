@@ -11,7 +11,7 @@ import java.util.Collection;
 
 // 스프링 시큐리티가 로그인 요청을 가로채서 로그인을 진행하고 완료가 되면
 // UserDetails타입의 오브젝트를 고유한 세션 저장소에 저장해준다.
-@Getter
+@Data
 public class PrincipalDetail implements UserDetails {
     private User user; // 컴포지션
 
