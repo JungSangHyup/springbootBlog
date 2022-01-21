@@ -1,5 +1,8 @@
 package com.cos.blog.controller;
 
+import com.cos.blog.model.OAuthToken;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -29,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/auth/kakao/callback")
-    public @ResponseBody String kakaoCallback(String code){// Data를 리턴해주는 컨트롤러 함수
+    public @ResponseBody String kakaoCallback(String code) {// Data를 리턴해주는 컨트롤러 함수
         // POST 방식으로 key=value 데이터를 요청
         // grant_type	String	authorization_code로 고정
         // client_id	String	앱 REST API 키
@@ -64,6 +67,33 @@ public class UserController {
                 String.class
         );
 
-        return "카카오 토큰 요청 완료:  " + response;
+        //Gson, JsonSimple, ObjectMapper
+        ObjectMapper objectMapper = new ObjectMapper();
+        OAuthToken oAuthToken = null;
+        try {
+            oAuthToken = objectMapper.readValue(response.getBody(), OAuthToken.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        RestTemplate rt2 = new RestTemplate();
+
+        // Header 생성
+        HttpHeaders headers2 = new HttpHeaders();
+        headers2.add("Authorization", "Bearer " + oAuthToken.getAccess_token());
+        headers2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+
+        // Header와 Body를 하나의 오브젝트에 담기
+        HttpEntity<MultiValueMap<String, String>> kakaoProfileRequest =
+                new HttpEntity<>(headers2);
+
+        ResponseEntity<String> response2 = rt2.exchange(
+                "https://kapi.kakao.com/v2/user/me",
+                HttpMethod.POST,
+                kakaoProfileRequest,
+                String.class
+        );
+
+        return response2.getBody();
     }
 }
