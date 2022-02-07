@@ -1,5 +1,6 @@
 package com.cos.blog.controller;
 
+import com.cos.blog.model.KakaoProfile;
 import com.cos.blog.model.OAuthToken;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -93,6 +94,18 @@ public class UserController {
                 kakaoProfileRequest,
                 String.class
         );
+
+        //Gson, JsonSimple, ObjectMapper
+        ObjectMapper objectMapper2 = new ObjectMapper();
+        KakaoProfile kakaoProfile = null;
+        try {
+            kakaoProfile = objectMapper2.readValue(response2.getBody(), KakaoProfile.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("카카오 아이디" + kakaoProfile.getId());
+        System.out.println("카카오 이메일" + kakaoProfile.getKakaoAccount().getEmail());
 
         return response2.getBody();
     }
